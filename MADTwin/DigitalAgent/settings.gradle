@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url "https://jitpack.io" }
+        maven {url  "http://jade.tilab.com/maven/"}
+        mavenCentral()
+    }
+}
+
+
+rootProject.name = 'UWBMapAgent'
+

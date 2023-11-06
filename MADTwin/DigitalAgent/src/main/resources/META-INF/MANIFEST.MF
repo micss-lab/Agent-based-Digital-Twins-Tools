@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: LaptopAgent
+Implementation-Version: 2.7.0-SNAPSHOT
+Implementation-Vendor: Ebert Schoofs
+Main-Class: agent.Initializer
