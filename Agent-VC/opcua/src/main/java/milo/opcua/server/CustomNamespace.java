@@ -8,7 +8,10 @@ import org.eclipse.milo.opcua.sdk.server.api.DataItem;
 import org.eclipse.milo.opcua.sdk.server.api.ManagedNamespace;
 import org.eclipse.milo.opcua.sdk.server.api.MonitoredItem;
 import org.eclipse.milo.opcua.sdk.server.model.nodes.objects.FolderTypeNode;
-import org.eclipse.milo.opcua.sdk.server.nodes.*;
+import org.eclipse.milo.opcua.sdk.server.nodes.UaFolderNode;
+import org.eclipse.milo.opcua.sdk.server.nodes.UaNode;
+import org.eclipse.milo.opcua.sdk.server.nodes.UaNodeContext;
+import org.eclipse.milo.opcua.sdk.server.nodes.UaVariableNode;
 import org.eclipse.milo.opcua.sdk.server.util.SubscriptionModel;
 import org.eclipse.milo.opcua.stack.core.Identifiers;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
@@ -20,15 +23,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class CustomNamespace extends ManagedNamespace {
-    int i=0;
     private static final Logger logger = LoggerFactory.getLogger(CustomNamespace.class);
     public static final String URI = "urn:my:custom:namespace";
-    private static final int DELAY_MS = 2000;
-    private static final int INTERVAL_MS = 500;
+    static UaVariableNode destinationPoint;
+    static UaVariableNode positionX;
+    static UaVariableNode positionY;
     private final SubscriptionModel subscriptionModel;
     public CustomNamespace(final OpcUaServer server, final String uri) throws InterruptedException {
         super(server, uri);
@@ -58,7 +59,7 @@ public class CustomNamespace extends ManagedNamespace {
 
         // add several variables
         {
-            UaVariableNode destinationPoint = new UaVariableNode.UaVariableNodeBuilder(getNodeContext())
+            destinationPoint = new UaVariableNode.UaVariableNodeBuilder(getNodeContext())
                     .setNodeId(newNodeId("0-unique-identifier"))
                     .setAccessLevel(AccessLevel.READ_WRITE)
                     .setUserAccessLevel(AccessLevel.READ_WRITE)
@@ -68,10 +69,10 @@ public class CustomNamespace extends ManagedNamespace {
                     .setDescription(LocalizedText.english("Target Destination Point"))
                     .build();
 
-            Vector3D vector = new Vector3D(5000, 6000, 0);
+            Vector3D vector = new Vector3D(7000, 9000, 0);
 
-            UaVariableNode positionX = createUaVariableNode(newNodeId("6-unique-identifier"), AccessLevel.READ_WRITE, AccessLevel.READ_WRITE, Identifiers.Integer, "X Position", "Updating the X Position", "Get the X Position");
-            UaVariableNode positionY = createUaVariableNode(newNodeId("7-unique-identifier"), AccessLevel.READ_WRITE, AccessLevel.READ_WRITE, Identifiers.Integer, "Y Position", "Updating the Y Position", "Get the Y Position");
+            positionX = createUaVariableNode(newNodeId("6-unique-identifier"), AccessLevel.READ_WRITE, AccessLevel.READ_WRITE, Identifiers.Integer, "X Position", "Updating the X Position", "Get the X Position");
+            positionY = createUaVariableNode(newNodeId("7-unique-identifier"), AccessLevel.READ_WRITE, AccessLevel.READ_WRITE, Identifiers.Integer, "Y Position", "Updating the Y Position", "Get the Y Position");
 
             // Set the variable node values
             destinationPoint.setValue(new DataValue(new Variant(vector.toString())));
@@ -83,27 +84,6 @@ public class CustomNamespace extends ManagedNamespace {
             context.getNodeManager().addNode(positionY);
             folder.addOrganizes(positionX);
             context.getNodeManager().addNode(positionX);
-
-
-            // Create a timer
-            Timer timer = new Timer();
-            // Create a TimerTask
-            TimerTask task = new TimerTask() {
-                @Override
-                // Code to be executed repeatedly at fixed intervals
-
-                public void run() {
-//                    positionX.setValue(new DataValue(new Variant(positionX.getValue().getValue().getValue())));
-//                    positionY.setValue(new DataValue(new Variant(positionY.getValue().getValue().getValue())));
-//                    folder.addOrganizes(positionX);
-//                    context.getNodeManager().addNode(positionX);
-//                    folder.addOrganizes(positionY);
-//                    context.getNodeManager().addNode(positionY);
-
-                    logger.info("Position update: ({}, {})",positionX.getValue().getValue().getValue(),positionY.getValue().getValue().getValue());
-
-                }
-            };
         }
     }
 
@@ -132,7 +112,6 @@ public class CustomNamespace extends ManagedNamespace {
         this.subscriptionModel.onMonitoringModeChanged(monitoredItems);
 
     }
-
 
     public UaVariableNode createUaVariableNode (NodeId nodeId, ImmutableSet<AccessLevel> accessLevel, ImmutableSet<AccessLevel> userAccessLevel, NodeId dataType, String qualifiedName, String displayName, String description)
     {

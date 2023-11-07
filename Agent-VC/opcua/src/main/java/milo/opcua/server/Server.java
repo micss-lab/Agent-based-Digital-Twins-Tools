@@ -69,6 +69,7 @@ public class Server {
         server.startup().get();
 
         System.out.println("server = " + server.getConfig().getBuildInfo());
+        Container.startContainer();
 
         // don't wait for me
         Thread.sleep(Long.MAX_VALUE);
