@@ -38,7 +38,7 @@ public class MovePlanBody extends AbstractPlanBody {
         destination = ((MovementCapability.DestinationGoal) getGoal()).getDestination();
         System.out.println("Start Moving to: " + destination);
         // create the csv file to store the coordinates
-        file = new File("c:\\temp\\DualAgentCoordinates.csv\\");
+        file = new File("temp\\DualAgentCoordinates.csv\\");
         try {
             output = new FileWriter(file);
         } catch (IOException e) {

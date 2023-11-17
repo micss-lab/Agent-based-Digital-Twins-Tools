@@ -13,7 +13,7 @@ public class CSVFile {
 
     public static void createCSVFile(String agentName){
         // create the csv file to store the coordinates
-        String filename = String.format("c:\\temp\\DualAgentCoordinates_%s.csv", agentName);
+        String filename = String.format("temp\\DualAgentCoordinates_%s.csv", agentName);
         file = new File(filename);
         if(file.exists() && !file.isDirectory()) {
             System.out.println("CSV File Is Already Exists");
