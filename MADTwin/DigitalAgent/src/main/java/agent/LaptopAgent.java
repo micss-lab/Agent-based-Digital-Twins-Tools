@@ -20,7 +20,7 @@ import jade.wrapper.StaleProxyException;
 import mqtt.TagIdMqtt;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import py4j.GatewayServer;
-import robot.bdi.Robot;
+import robot.simple.Robot;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -78,7 +78,8 @@ public class LaptopAgent extends Agent {
     public void sendMessage(String message, AID aid) {
         System.out.println("=========Sending Control Message=========");
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.addReceiver(aid);
+        //Sending the message to the physical agent
+        //msg.addReceiver(aid);
         msg.setConversationId("mission_control");
         // get the dual agent that is identical to the physical agent
         AID dual_aid = dualAgents.get(aid);
@@ -87,7 +88,7 @@ public class LaptopAgent extends Agent {
         }
         msg.setContent(message);
         send(msg);
-        System.out.println("==> Agent: "+msg.getSender().getName()+" - Sent "+msg.getContent()+" ==> "+aid);
+        System.out.println("==> Agent: "+msg.getSender().getName()+" - Sent "+msg.getContent()+" ==> "+dual_aid);
         System.out.println("=======End Sending Control Message=======");
     }
 
