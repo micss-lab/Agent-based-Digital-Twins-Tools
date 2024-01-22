@@ -2,7 +2,7 @@
 
 This documentation provides an overview of a project that combines remote Java with an OPC UA server and Python program for a Visual Components simulation. The project includes code files that control the behavior of a simulated vehicle and manage OPC UA data.
 
-You can download the Visual Components V4.6 from the following link: [Download Page](https://download.visualcomponents.net/installers/VisualComponents/4.6.0/VisualComponentsPremiumSetup_64.exe)
+You can download the Visual Components V4.6 from the following link: [Download](https://download.visualcomponents.net/installers/VisualComponents/4.6.0/VisualComponentsPremiumSetup_64.exe)
 
 ## Project Structure
 
