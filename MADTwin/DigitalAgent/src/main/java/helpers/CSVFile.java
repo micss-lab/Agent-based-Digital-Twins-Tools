@@ -11,11 +11,12 @@ public class CSVFile {
     static FileWriter output;
     static CSVWriter writer;
 
-    public static void createCSVFile(String agentName){
+    public static void createCSVFile(String agentName) {
         // create the csv file to store the coordinates
+        CSVFile.createFolder("temp");
         String filename = String.format("temp\\DualAgentCoordinates_%s.csv", agentName);
         file = new File(filename);
-        if(file.exists() && !file.isDirectory()) {
+        if (file.exists() && !file.isDirectory()) {
             System.out.println("CSV File Is Already Exists");
             try {
                 output = new FileWriter(filename, true);
@@ -23,8 +24,7 @@ public class CSVFile {
                 e.printStackTrace();
             }
             writer = new CSVWriter(output);
-        }
-        else{
+        } else {
             System.out.println("Creating CSV File");
             try {
                 output = new FileWriter(file);
@@ -54,4 +54,19 @@ public class CSVFile {
         writer.close();
     }
 
+    static void createFolder(String folderName) {
+        String directoryName = folderName;
+        File directory = new File(directoryName);
+        if (!directory.exists()) {
+            boolean result = directory.mkdir();
+            if (result) {
+                System.out.printf("Directory '%s' created successfully!",directoryName);
+            } else {
+                System.out.printf("Failed to create directory '%s'.",directoryName);
+            }
+        } else {
+            System.out.printf("Directory '%s' already exists.",directoryName);
+        }
+    }
 }
+
