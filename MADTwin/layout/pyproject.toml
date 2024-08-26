@@ -2,7 +2,7 @@
 name = "uwbmap"
 version = "0.1.0"
 description = ""
-authors = ["Ebert Schoofs <ebertschoofs@gmail.com>"]
+authors = ["Hussein Marah <hussein.marah@gmail.com>","Ebert Schoofs <ebertschoofs@gmail.com>"]
 
 [tool.poetry.scripts]
 ampyfier = "layout.uwbmap.__main__:__main__"
@@ -14,12 +14,11 @@ paho-mqtt = "^1.6.1"
 py4j = "^0.10.9"
 PyQt6 = "^6.2.3"
 matplotlib = "^3.6.1"
-similaritymeasures = "^0.6.0"
 PySide6 = "^6.4.1"
+pandas = "^1.5.3"
 
 [tool.poetry.dev-dependencies]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
