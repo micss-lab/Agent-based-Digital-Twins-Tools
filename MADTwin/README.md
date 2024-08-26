@@ -3,7 +3,7 @@
 ### Installing the UI
 0. Change the directory to layout (based on the OS you are using)
 ```shell
-cd .\uwbmap\
+cd .\MADTwin\layout\
 ```
 1. Install Poetry
 ```shell
@@ -24,7 +24,7 @@ poetry install
 ### Usage
 1. Check if the MQTT brokers are configured correctly in the config file and if the mosquitto local host is running (Windows/Linux/Mac). For Windows, you can check **Windows Services**. Then open the CMD as administrator and change the directory to the mosquitto, and run the following command:
 ``` shell
-net start mosquitto
+.\mosquitto.exe -v
 ```
 2. Check if the localhost with port:1883 is open by running the following command:
 ``` shell
@@ -36,8 +36,15 @@ python -m uwbmap
 ```
 
 ### JAVA Digital Agent
-1. The easiest way is to import the **Digital Agent** project into IntelliJ
-2. Make sure to create a folder with a name ``temp`` in the C directory
+1. The easiest way is to import the **Digital Agent** project into IntelliJ and build it with Gradle.
+2. Or, you can run it directly from PowerShell and using the Gradle building tool by running the following commands:
+``` shell
+.\gradlew build  
+```
+Followed by running the project:
+``` shell
+.\gradlew run
+```
 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
