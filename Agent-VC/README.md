@@ -32,10 +32,18 @@ To enable communication between Visual Components and the OPC UA server, use the
 ### 2. Install Java Dependencies with Maven
 
 To install the Java dependencies required for the Java OPC UA server component, use Maven. Navigate to the Java project directory in your terminal and run the following command:
-
 ```bash
-mvn install
+cd .\Agent-VC\opcua\
 ```
+Then:
+```bash
+mvn clean install
+```
+Finally, you can run the project with the following command:
+```bash
+mvn -f pom.xml exec:java@ServerMain
+```
+Also, you can import the project into IntelliJ and run the main class `Server`
 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
