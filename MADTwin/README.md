@@ -1,5 +1,16 @@
 ## Multi-agent Digital Twin Platform (MADTwin)
 
+### JAVA Digital Agent
+1. The easiest way is to import the **Digital Agent** project into IntelliJ and build and run it with Gradle.
+2. Or, you can run it directly from PowerShell and using the Gradle building tool by running the following commands:
+``` shell
+.\gradlew build  
+```
+Followed by running the project:
+``` shell
+.\gradlew run
+```
+
 ### Installing the UI
 0. Change the directory to layout (based on the OS you are using)
 ```shell
@@ -33,17 +44,6 @@ netstat -a
 3. Start the UI
 ```shell
 python -m uwbmap
-```
-
-### JAVA Digital Agent
-1. The easiest way is to import the **Digital Agent** project into IntelliJ and build it with Gradle.
-2. Or, you can run it directly from PowerShell and using the Gradle building tool by running the following commands:
-``` shell
-.\gradlew build  
-```
-Followed by running the project:
-``` shell
-.\gradlew run
 ```
 
 This work is licensed under a
