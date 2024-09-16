@@ -47,6 +47,8 @@ python -m uwbmap
 ```
 3. After you initialize the UI, you need to use `Ctrl+scroll wheel` to zoom in and zoom out so the floorplan appears.
 
+4. Demonstration video: [Link](https://youtu.be/btcVBjFgKCQ)
+
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
 
