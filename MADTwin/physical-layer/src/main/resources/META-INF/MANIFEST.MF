@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Implementation-Title: EV3Dev-lang-java
 Implementation-Version: 1.0.0-SNAPSHOT
 Implementation-Vendor: Hussein Marah
-Main-Class: com.robot.example.LargeMotorDemo
+Main-Class: com.robot.containers.InitializeContainer
 
 
 
