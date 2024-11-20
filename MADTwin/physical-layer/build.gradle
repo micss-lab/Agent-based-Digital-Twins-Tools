@@ -1,0 +1,67 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'org.hidetake.ssh' version '2.10.1'
+    id "net.ossindex.audit" version "0.4.5-beta"
+    id "com.github.johnrengelman.shadow" version "4.0.3"
+}
+
+version = '1.0.0'
+
+// Project definitions
+
+repositories {
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.slf4j:slf4j-simple:1.7.25")
+//    implementation 'com.github.ev3dev-lang-java:ev3dev-lang-java:2.4.13'
+    implementation("com.github.ev3dev-lang-java:ev3dev-lang-java:2.5.3")
+    implementation 'com.github.ev3dev-lang-java:ev3dev-lang-java:0.7.0'
+    implementation 'com.github.ev3dev-lang-java:lejos-navigation:0.2.0'
+    implementation 'com.github.ev3dev-lang-java:lejos-commons:0.7.1'
+
+    implementation fileTree(dir: 'lib', include: ['*.jar'])
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
+    implementation('org.json:json:20210307')
+    implementation('org.jfree:jfreechart:1.5.3')
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.2'
+    implementation 'org.projectlombok:lombok:0.11.0'
+    implementation 'com.github.sh0nk:matplotlib4j:0.5.0'
+    implementation files('lib/robot.digital.layer-1.0.jar')
+    implementation files('lib/jade-4.5.0.jar')
+
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+//Compile
+compileJava {
+    sourceCompatibility = 11
+    targetCompatibility = 11
+}
+
+//Jar
+jar {
+//    baseName = "${rootProject.name}"
+    manifest {
+        from file("${projectDir}/src/main/resources/META-INF/MANIFEST.MF")
+    }
+}
+
+task fatJar {
+    doLast {
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+fatJar.dependsOn shadowJar
+
+apply from: './config.gradle'
+apply from: './gradle/deploy.gradle'
+
